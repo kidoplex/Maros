@@ -1,59 +1,68 @@
-import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import HomeIcon from '@mui/icons-material/Home';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Link from 'next/link';
-import LoginIcon from '@mui/icons-material/Login';
-import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+"use client"; // Mark this component as a Client Component
 
-const Navbar: React.FC = () => {
+import * as React from 'react'; // Import React
+import BottomNavigation from '@mui/material/BottomNavigation'; // Material UI BottomNavigation
+import BottomNavigationAction from '@mui/material/BottomNavigationAction'; // Material UI BottomNavigationAction
+import HomeIcon from '@mui/icons-material/Home'; // Home icon
+import AddBoxIcon from '@mui/icons-material/AddBox'; // Add post icon
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'; // Profile icon
+import LoginIcon from '@mui/icons-material/Login'; // Sign In icon
+import AppRegistrationIcon from '@mui/icons-material/AppRegistration'; // Sign Up icon
+import { useState } from 'react'; // React hook for state management
+import Link from 'next/link'; // Link component from Next.js
+
+const NavBar = () => {
+  const [value, setValue] = useState('home'); // State to manage the active bottom navigation item
+
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue); // Update the active navigation item
+  };
+
   return (
-    <AppBar 
-      position="fixed" 
-      color="primary" 
-      sx={{ top: 'auto', bottom: 0 }} // Position it at the bottom
+    <BottomNavigation
+      sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }} // Fix position at the bottom
+      value={value} // Active navigation value
+      onChange={handleChange} // Change handler for navigation
     >
-      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        {/* Home Icon */}
-        <Link href="/" passHref>
-          <IconButton color="inherit">
-            <HomeIcon />
-          </IconButton>
-        </Link>
-
-        {/* SignUp Icon */}
-        <Link href="auth/registracia" passHref>
-          <IconButton color="inherit">
-            <AppRegistrationIcon />
-          </IconButton>
-        </Link>
-
-        {/* Add Post Icon */}
-        <Link href="/pridat" passHref>
-          <IconButton color="inherit">
-            <AddCircleOutlineIcon />
-          </IconButton>
-        </Link>
-
-        {/* SignIn Icon */}
-        <Link href="auth/prihlasenie" passHref>
-          <IconButton color="inherit">
-            <LoginIcon />
-          </IconButton>
-        </Link>
-
-        {/* Profile Icon */}
-        <Link href="/profil" passHref>
-          <IconButton color="inherit">
-            <AccountCircleIcon />
-          </IconButton>
-        </Link>
-      </Toolbar>
-    </AppBar>
+      <BottomNavigationAction
+        label="Home"
+        value="home" // Value for Home
+        icon={<HomeIcon />} // Home icon
+        component={Link} // Use Next.js Link for navigation
+        href="/" // Home page link
+      />
+      <BottomNavigationAction
+        label="Add"
+        value="add" // Value for Add
+        icon={<AddBoxIcon />} // Add post icon
+        component={Link} // Use Next.js Link for navigation
+        href="/pridat" // Add post page link
+      />
+      <BottomNavigationAction
+        label="Profile"
+        value="profile" // Value for Profile
+        icon={<AccountCircleIcon />} // Profile icon
+        component={Link} // Use Next.js Link for navigation
+        href="/profil" // Profile page link
+      />
+      <BottomNavigationAction
+        label="Sign In"
+        value="sign-in" // Value for Sign In
+        icon={<LoginIcon />} // Sign In icon
+        component={Link} // Use Next.js Link for navigation
+        href="/auth/prihlasenie" // Sign In page link
+      />
+      <BottomNavigationAction
+        label="Sign Up"
+        value="sign-up" // Value for Sign Up
+        icon={<AppRegistrationIcon />} // Sign Up icon
+        component={Link} // Use Next.js Link for navigation
+        href="/auth/registracia" // Sign Up page link
+      />
+    </BottomNavigation>
   );
 };
 
-export default Navbar;
+export default NavBar; // Export the NavBar component
+
+

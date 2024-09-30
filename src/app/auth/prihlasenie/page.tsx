@@ -1,11 +1,17 @@
+// Prihlasenie
+
 // src/app/auth/prihlasenie/page.tsx
 
 import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 
-export const metadata = {title: 'Prihlasenie | ZoskaSnap'}
+export const metadata = { title: 'Prihlasenie | ZoskaSnap'}
 
 export default function SignIn() {
-  return (
-    <Typography> Prihlasenie Uzivatela </Typography>
+
+  return(
+    <Container>
+      <Typography> Prihlasenie </Typography>
+    </Container>
   );
 }
