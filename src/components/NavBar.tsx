@@ -1,80 +1,49 @@
-// src/components/NavBar.tsx
-
-import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem } from '@mui/material';
-import { useState } from 'react';
-import MenuIcon from '@mui/icons-material/Menu';
+import React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import HomeIcon from '@mui/icons-material/Home';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Link from 'next/link';
-import { useSession, signIn, signOut } from 'next-auth/react';
-import Avatar from '@mui/material/Avatar';
-import { useRouter } from 'next/router';
 
-const NavBar = () => {
-  const { data: session } = useSession();
-  const router = useRouter();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-  const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleSignOut = async () => {
-    await signOut();
-    router.push('/');
-  };
-
+const Navbar: React.FC = () => {
   return (
-    <AppBar position="static" color="primary">
+    <AppBar position="static">
       <Toolbar>
-        {/* Left Side - Logo or App Name */}
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+        <IconButton edge="start" color="inherit" aria-label="home">
           <Link href="/" passHref>
-            <a style={{ color: 'inherit', textDecoration: 'none' }}>Instagram Clone</a>
+            <HomeIcon />
           </Link>
+        </IconButton>
+
+        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          SnapZoska
         </Typography>
 
-        {/* Right Side - Links and Auth Controls */}
-        {session ? (
-          <>
-            {/* Avatar for Authenticated User */}
-            <IconButton onClick={handleMenuClick} color="inherit">
-              <Avatar alt={session.user?.name || 'User'} src={session.user?.image || ''} />
-            </IconButton>
-            <Menu
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleMenuClose}
-            >
-              <MenuItem onClick={handleMenuClose}>
-                <Link href={`/profil/${session.user?.id}`} passHref>
-                  <a>Profile</a>
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleMenuClose}>
-                <Link href="/pridat" passHref>
-                  <a>Add Post</a>
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleSignOut}>Logout</MenuItem>
-            </Menu>
-          </>
-        ) : (
-          <Button color="inherit" onClick={() => signIn()}>
-            Sign In
+        <Link href="/pridat" passHref>
+          <Button color="inherit" startIcon={<AddCircleOutlineIcon />}>
+            Add Post
           </Button>
-        )}
+        </Link>
 
-        {/* Mobile Menu Button */}
-        <IconButton edge="end" color="inherit" aria-label="menu" sx={{ display: { sm: 'none' } }}>
-          <MenuIcon />
-        </IconButton>
+        <Link href="/notifikacie" passHref>
+          <IconButton color="inherit">
+            <NotificationsIcon />
+          </IconButton>
+        </Link>
+
+        <Link href="/profil" passHref>
+          <IconButton color="inherit">
+            <AccountCircleIcon />
+          </IconButton>
+        </Link>
       </Toolbar>
     </AppBar>
   );
 };
 
-export default NavBar;
+export default Navbar;
