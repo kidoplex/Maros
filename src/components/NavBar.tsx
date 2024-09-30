@@ -8,7 +8,6 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchIcon from '@mui/icons-material/Search';
 import Link from 'next/link';
-import Box from '@mui/material/Box';
 
 const Navbar: React.FC = () => {
   return (
