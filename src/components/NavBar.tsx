@@ -1,41 +1,52 @@
-import React from 'react';
+mport React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import HomeIcon from '@mui/icons-material/Home';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import SearchIcon from '@mui/icons-material/Search';
 import Link from 'next/link';
+import Box from '@mui/material/Box';
 
 const Navbar: React.FC = () => {
   return (
-    <AppBar position="static">
-      <Toolbar>
-        <IconButton edge="start" color="inherit" aria-label="home">
-          <Link href="/" passHref>
+    <AppBar 
+      position="fixed" 
+      color="primary" 
+      sx={{ top: 'auto', bottom: 0 }} // Position it at the bottom
+    >
+      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        {/* Home Icon */}
+        <Link href="/" passHref>
+          <IconButton color="inherit">
             <HomeIcon />
-          </Link>
-        </IconButton>
-
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          SnapZoska
-        </Typography>
-
-        <Link href="/pridat" passHref>
-          <Button color="inherit" startIcon={<AddCircleOutlineIcon />}>
-            Add Post
-          </Button>
+          </IconButton>
         </Link>
 
+        {/* Search Icon */}
+        <Link href="/hladanie" passHref>
+          <IconButton color="inherit">
+            <SearchIcon />
+          </IconButton>
+        </Link>
+
+        {/* Add Post Icon */}
+        <Link href="/pridat" passHref>
+          <IconButton color="inherit">
+            <AddCircleOutlineIcon />
+          </IconButton>
+        </Link>
+
+        {/* Notifications Icon */}
         <Link href="/notifikacie" passHref>
           <IconButton color="inherit">
             <NotificationsIcon />
           </IconButton>
         </Link>
 
+        {/* Profile Icon */}
         <Link href="/profil" passHref>
           <IconButton color="inherit">
             <AccountCircleIcon />
